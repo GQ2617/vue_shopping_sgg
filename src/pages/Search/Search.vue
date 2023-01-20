@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TypeNav />
+    <TypeNav/>
     <div class="main">
       <div class="py-container">
         <!--bread-->
@@ -13,7 +13,8 @@
           <ul class="fl sui-tag">
             <!-- 分类 -->
             <li class="with-x" v-if="searchParams.categoryName">
-              {{ searchParams.categoryName
+              {{
+                searchParams.categoryName
               }}<i @click="removeCategoryName">×</i>
             </li>
             <!-- 关键字 -->
@@ -22,14 +23,15 @@
             </li>
             <!-- 品牌 -->
             <li class="with-x" v-if="searchParams.trademark">
-              {{ searchParams.trademark.split(":")[1]
+              {{
+                searchParams.trademark.split(":")[1]
               }}<i @click="removeTrademark">×</i>
             </li>
             <!-- 属性 -->
             <li
-              class="with-x"
-              v-for="(props, index) in searchParams.props"
-              :key="props.split(':')[0]"
+                class="with-x"
+                v-for="(props, index) in searchParams.props"
+                :key="props.split(':')[0]"
             >
               {{ props.split(":")[1] }}<i @click="removeAttrs(index)">×</i>
             </li>
@@ -37,7 +39,7 @@
         </div>
 
         <!--selector-->
-        <SearchSelector @trademarkInfo="trademarkInfo" @attrsInfo="attrsInfo" />
+        <SearchSelector @trademarkInfo="trademarkInfo" @attrsInfo="attrsInfo"/>
 
         <!--details-->
         <div class="details clearfix">
@@ -47,27 +49,27 @@
               <ul class="sui-nav">
                 <li :class="{ active: isOne }" @click="changeOrder('1')">
                   <a
-                    >综合
+                  >综合
                     <span
-                      v-show="isOne"
-                      :class="{
+                        v-show="isOne"
+                        :class="{
                         'el-icon-caret-bottom': isDesc,
                         'el-icon-caret-top': isAsc,
                       }"
                     ></span
-                  ></a>
+                    ></a>
                 </li>
                 <li :class="{ active: isTwo }" @click="changeOrder('2')">
                   <a
-                    >价格
+                  >价格
                     <span
-                      v-show="isTwo"
-                      :class="{
+                        v-show="isTwo"
+                        :class="{
                         'el-icon-caret-bottom': isDesc,
                         'el-icon-caret-top': isAsc,
                       }"
                     ></span
-                  ></a>
+                    ></a>
                 </li>
               </ul>
             </div>
@@ -76,15 +78,15 @@
           <div class="goods-list">
             <ul class="yui3-g">
               <li
-                class="yui3-u-1-5"
-                v-for="(goodsList, index) in goodsList"
-                :key="goodsList.id"
+                  class="yui3-u-1-5"
+                  v-for="(goodsList, index) in goodsList"
+                  :key="goodsList.id"
               >
                 <div class="list-wrap">
                   <!-- 商品图片 -->
                   <div class="p-img">
                     <router-link :to="`/detail/${goodsList.id}`"
-                      ><img v-lazy="goodsList.defaultImg"
+                    ><img v-lazy="goodsList.defaultImg"
                     /></router-link>
                   </div>
                   <!-- 商品价格 -->
@@ -97,29 +99,29 @@
                   <!-- 商品信息 -->
                   <div class="attr">
                     <a
-                      target="_blank"
-                      href="item.html"
-                      :title="goodsList.title"
-                      >{{ goodsList.title }}</a
+                        target="_blank"
+                        href="item.html"
+                        :title="goodsList.title"
+                    >{{ goodsList.title }}</a
                     >
                   </div>
                   <!-- 商品热度 -->
                   <div class="commit">
                     <i class="command"
-                      >已有<span>{{ goodsList.hotScore }}</span
-                      >人评价</i
+                    >已有<span>{{ goodsList.hotScore }}</span
+                    >人评价</i
                     >
                   </div>
                   <!-- 商品操作 -->
                   <div class="operate">
                     <a
-                      href="success-cart.html"
-                      target="_blank"
-                      class="sui-btn btn-bordered btn-danger"
-                      >加入购物车</a
+                        href="success-cart.html"
+                        target="_blank"
+                        class="sui-btn btn-bordered btn-danger"
+                    >加入购物车</a
                     >
                     <a href="javascript:void(0);" class="sui-btn btn-bordered"
-                      >收藏</a
+                    >收藏</a
                     >
                   </div>
                 </div>
@@ -128,11 +130,11 @@
           </div>
           <!-- 分页器 -->
           <Pagination
-            :pageNo="searchParams.pageNo"
-            :pageSize="searchParams.pageSize"
-            :total="total"
-            :continues="5"
-            @getPageNo="getPageNo"
+              :pageNo="searchParams.pageNo"
+              :pageSize="searchParams.pageSize"
+              :total="total"
+              :continues="5"
+              @getPageNo="getPageNo"
           />
         </div>
       </div>
@@ -141,8 +143,9 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from "vuex";
+import {mapGetters, mapState} from "vuex";
 import SearchSelector from "./SearchSelector/SearchSelector";
+
 export default {
   name: "Search",
   components: {
@@ -186,7 +189,7 @@ export default {
       this.getData();
       // 路径修改
       if (this.$route.params) {
-        this.$router.push({ name: "search", params: this.$route.params });
+        this.$router.push({name: "search", params: this.$route.params});
       }
     },
     // 删除关键字
@@ -199,7 +202,7 @@ export default {
       this.$bus.$emit("clear");
       // 修改路径
       if (this.$route.query) {
-        this.$router.push({ name: "search", query: this.$route.query });
+        this.$router.push({name: "search", query: this.$route.query});
       }
     },
     // 自定义事件接收子组件传递的品牌信息
@@ -268,7 +271,7 @@ export default {
       return this.searchParams.order.indexOf("2") != -1;
     },
     isAsc() {
-      return this.searchParams.order.indexOf("asc") != -1;
+      return this.searchParams.order.indexOf("asc") !== -1;
     },
     isDesc() {
       return this.searchParams.order.indexOf("desc") != -1;
